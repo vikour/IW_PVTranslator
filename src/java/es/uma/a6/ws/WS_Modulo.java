@@ -6,6 +6,7 @@
 package es.uma.a6.ws;
 
 import es.uma.a6.beans.ModuloFacade;
+import es.uma.a6.entity.Campaña;
 import es.uma.a6.entity.Modulo;
 import java.util.List;
 import javax.ejb.EJB;
@@ -17,11 +18,11 @@ import javax.jws.WebParam;
 
 /**
  *
- * @author vikour
+ * @author Carlos
  */
-@WebService(serviceName = "WSmodulo")
+@WebService(serviceName = "WS_Modulo")
 @Stateless()
-public class WSmodulo {
+public class WS_Modulo {
 
     @EJB
     private ModuloFacade ejbRef;// Add business logic below. (Right-click in editor and choose
@@ -63,6 +64,36 @@ public class WSmodulo {
     @WebMethod(operationName = "count")
     public int count() {
         return ejbRef.count();
+    }
+
+    @WebMethod(operationName = "findAllOrderedByName")
+    public List<Modulo> findAllOrderedByName() {
+        return ejbRef.findAllOrderedByName();
+    }
+
+    @WebMethod(operationName = "findAllOrderedByAlpha")
+    public List<Modulo> findAllOrderedByAlpha() {
+        return ejbRef.findAllOrderedByAlpha();
+    }
+
+    @WebMethod(operationName = "findAllOrderedByBeta")
+    public List<Modulo> findAllOrderedByBeta() {
+        return ejbRef.findAllOrderedByBeta();
+    }
+
+    @WebMethod(operationName = "findAllOrderedByKappa")
+    public List<Modulo> findAllOrderedByKappa() {
+        return ejbRef.findAllOrderedByKappa();
+    }
+
+    @WebMethod(operationName = "findAllOrderedByGamma")
+    public List<Modulo> findAllOrderedByGamma() {
+        return ejbRef.findAllOrderedByGamma();
+    }
+
+    @WebMethod(operationName = "findModuloByCampa\u00f1a")
+    public Modulo findModuloByCampaña(@WebParam(name = "c") Campaña c) {
+        return ejbRef.findModuloByCampaña(c);
     }
     
 }

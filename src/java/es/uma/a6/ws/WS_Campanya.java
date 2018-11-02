@@ -7,6 +7,7 @@ package es.uma.a6.ws;
 
 import es.uma.a6.beans.CampañaFacade;
 import es.uma.a6.entity.Campaña;
+import es.uma.a6.entity.Modulo;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.jws.WebService;
@@ -17,11 +18,11 @@ import javax.jws.WebParam;
 
 /**
  *
- * @author vikour
+ * @author Carlos
  */
-@WebService(serviceName = "WSCampanya")
+@WebService(serviceName = "WS_Campanya")
 @Stateless()
-public class WSCampanya {
+public class WS_Campanya {
 
     @EJB
     private CampañaFacade ejbRef;// Add business logic below. (Right-click in editor and choose
@@ -63,6 +64,26 @@ public class WSCampanya {
     @WebMethod(operationName = "count")
     public int count() {
         return ejbRef.count();
+    }
+
+    @WebMethod(operationName = "findAllOrderedByName")
+    public List<Campaña> findAllOrderedByName() {
+        return ejbRef.findAllOrderedByName();
+    }
+
+    @WebMethod(operationName = "findAllOrderedByDateAsc")
+    public List<Campaña> findAllOrderedByDateAsc() {
+        return ejbRef.findAllOrderedByDateAsc();
+    }
+
+    @WebMethod(operationName = "findAllOrderedByDateDesc")
+    public List<Campaña> findAllOrderedByDateDesc() {
+        return ejbRef.findAllOrderedByDateDesc();
+    }
+
+    @WebMethod(operationName = "findByModulo")
+    public List<Campaña> findByModulo(@WebParam(name = "m") Modulo m) {
+        return ejbRef.findByModulo(m);
     }
     
 }

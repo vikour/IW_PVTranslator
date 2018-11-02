@@ -13,6 +13,7 @@ CREATE TABLE modulo (
 
 CREATE TABLE campaña (
     nombre VARCHAR(50) PRIMARY KEY,
+    fecha DATE NOT NULL,
     modulo VARCHAR(50) NOT NULL,
     CONSTRAINT modulo_fk FOREIGN KEY (modulo) REFERENCES modulo(nombre) ON DELETE CASCADE
 );

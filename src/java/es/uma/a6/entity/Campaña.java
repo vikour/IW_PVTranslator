@@ -6,6 +6,7 @@
 package es.uma.a6.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,20 +16,23 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author vikour
+ * @author Carlos
  */
 @Entity
 @Table(name = "CAMPA\u00d1A")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Campa\u00f1a.findAll", query = "SELECT c FROM Campa\u00f1a c")
-    , @NamedQuery(name = "Campa\u00f1a.findByNombre", query = "SELECT c FROM Campa\u00f1a c WHERE c.nombre = :nombre")})
+    , @NamedQuery(name = "Campa\u00f1a.findByNombre", query = "SELECT c FROM Campa\u00f1a c WHERE c.nombre = :nombre")
+    , @NamedQuery(name = "Campa\u00f1a.findByFecha", query = "SELECT c FROM Campa\u00f1a c WHERE c.fecha = :fecha")})
 public class Campaña implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,6 +42,11 @@ public class Campaña implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "NOMBRE")
     private String nombre;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "FECHA")
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
     @JoinColumn(name = "MODULO", referencedColumnName = "NOMBRE")
     @ManyToOne(optional = false)
     private Modulo modulo;
@@ -49,12 +58,25 @@ public class Campaña implements Serializable {
         this.nombre = nombre;
     }
 
+    public Campaña(String nombre, Date fecha) {
+        this.nombre = nombre;
+        this.fecha = fecha;
+    }
+
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     public Modulo getModulo() {
