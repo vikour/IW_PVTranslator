@@ -95,5 +95,13 @@ public class WS_Modulo {
     public Modulo findModuloByCampaña(@WebParam(name = "c") Campaña c) {
         return ejbRef.findModuloByCampaña(c);
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "findModuloByNombre")
+    public Modulo findModuloByNombre(@WebParam(name = "nombre") String nombre) {
+        return ejbRef.findModuloByNombre(nombre);
+    }
     
 }
